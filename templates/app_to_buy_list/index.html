@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
 
-<body>
-  Мій список речей на покупку налічує: {{ num_item }} шт.
-  <br>
-  Мій список речей налічє: {{ num_item_types }} типів.
-  <br>
-  Ви відвідали цей сайт {{ num_visits }} разів!
-</body>
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    My Card
+  </div>
+  <div class="card-body">
+    Мій список речей на покупку налічує: {{ num_item }} шт.
+    <br>
+    Мій список речей налічє: {{ num_item_types }} типів.
+    <br>
+    Ви відвідали цей сайт {{ num_visits }} разів!
+  </div>
+</div>
 <br>
-<a type="button" href="{% url 'app_to_buy_list:item-list' %}">To list</a>
-</html>
+
+{% endblock content %}

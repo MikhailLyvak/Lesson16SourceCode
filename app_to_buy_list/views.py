@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
+from django.urls import reverse_lazy
 
 from .models import Item, ItemType
 
@@ -23,3 +24,13 @@ class ItemListView(generic.ListView):
     model = Item
     template_name = "app_to_buy_list/item_list.html"
     context_object_name = "item_list"
+    
+    def get_queryset(self):
+        return Item.objects.select_related("item_type")
+    
+
+class ItemCreateView(generic.CreateView):
+    model = Item
+    template_name = 'app_to_buy_list/create_item.html'
+    fields = "__all__"
+    success_url = reverse_lazy('app_to_buy_list:item-list')
