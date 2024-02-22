@@ -1,0 +1,40 @@
+{% extends 'auth.html' %}
+{% load crispy_forms_tags %}
+
+{% block context %}
+<form method="post" class="page-content">
+    {% csrf_token %}
+    <div class="row justify-content-center">
+        <div class="card m-3 card-animate shadow-lg mt-5"
+            style="max-width:600px; min-width:400px; background-color: rgba(255, 255, 255, 0.9);">
+            <div class="card-header" style="background-color: rgba(255, 255, 255, 0);">
+                <h3 class="display-6 text-body fw-medium text-center">Авторизуватися</h3>
+            </div>
+            <div class="card-body">
+                <div class="row justify-content-center ">
+                    {% if form.non_field_errors %}
+                    <ul class="list-unstyled">
+                        {% for error in form.non_field_errors %}
+                        <div class="alert alert-danger mb-xl-0 m-3 text-center" role="alert">
+                            {{ error }}
+                        </div>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    {{ form|crispy }}
+                </div>
+                <div class="row mb-2">
+                    <div class="col-5">
+                        <button type="submit" class="btn btn-success"
+                            style="margin-left:45px; padding:10px 35px;">Увійти</button>
+                    </div>
+                    <div class="col-7">
+                        <a class="btn btn-warning" href="{% url 'users:register' %}"
+                            style="margin-left:45px; padding:10px 35px;">Зареєструватися?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock context %}

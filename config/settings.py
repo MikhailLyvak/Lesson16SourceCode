@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'bootstrap4',
     'crispy_forms',
-    'crispy_bootstrap4'
+    'crispy_bootstrap4',
+    'users'
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
@@ -60,6 +61,13 @@ MIDDLEWARE = [
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+AUTHENTICATION_BACKENDS = (
+    "users.backends.EmailBackend",
+    "django.contrib.auth.backends.ModelBackend",
+)
+
+AUTH_USER_MODEL = "users.CustomUser"
 
 ROOT_URLCONF = 'config.urls'
 

@@ -5,8 +5,11 @@
 <div class="card">
   <div class="card-header">
     <div class="row">
-      <div class="col-6">
+      <div class="col-4">
         To buy list table
+      </div>
+      <div class="col-2">
+        Total amoint of items: {{ total_amount }} psc.
       </div>
       <div class="col-6 text-end">
         <div class="d-flex justify-content-end">
@@ -20,9 +23,13 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Description</th>
           <th>Price</th>
+          <th>Future</th>
           <th>Item Type</th>
+          <th>Update</th>
+          <th>Detail</th>
+          <th>Delete</th>
+          <th>Stauts</th>
         </tr>
       </thead>
       <tbody>
@@ -30,20 +37,38 @@
         {% for item in item_list %}
         <tr>
           <td>
-            {{ item.name }}
-          </td>
-          <td>
-            {% if not item.discription %}
-            -==-
+            {% if item.link %}
+            <a href="{{ item.link }}" target="_blank">{{ item.name }}</a>
             {% else %}
-            {{ item.discription }}
+            {{ item.name }}
             {% endif %}
           </td>
           <td>
             {{ item.price }}
           </td>
           <td>
+            {{ item.price_future }}
+          </td>
+          <td>
             {{ item.item_type.name }}
+          </td>
+          <td>
+            <a class="text-warning" href="{% url 'app_to_buy_list:item-update' pk=item.pk %}">Update</a>
+          </td>
+          <td>
+            <a class="text-info" href="{% url 'app_to_buy_list:item-detail' pk=item.pk %}">Detail</a>
+          </td>
+          <td>
+            <a class="text-danger" href="{% url 'app_to_buy_list:item-delete' pk=item.pk %}">Delete</a>
+          </td>
+          <td>
+            {% if item.is_bought %}
+            <button class=" btn btn-success" href="{% url 'app_to_buy_list:mark-as-bought' pk=item.pk %}"
+              disabled>Bought!</button>
+            {% else %}
+            <a class=" btn btn-primary" href="{% url 'app_to_buy_list:mark-as-bought' pk=item.pk %}">Buy</a>
+            {% endif %}
+
           </td>
         </tr>
         {% endfor %}

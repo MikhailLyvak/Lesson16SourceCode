@@ -24,5 +24,6 @@ if settings.DEBUG:
 urlpatterns = [
     path('__debug__/', include(debug_toolbar.urls)),
     path('admin/', admin.site.urls),
-    path("", include("app_to_buy_list.urls"))
+    path("", include("app_to_buy_list.urls")),
+    path("", include("users.urls")),
 ]

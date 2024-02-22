@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      Item {{ item.name }} detail page
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <table class="table table-bordered vertical-table">
+        <tbody>
+          <tr>
+            <th scope="row">Name</th>
+            <td>{{ item.name }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Price</th>
+            <td>{{ item.price }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Description</th>
+            <td>{{ item.discription }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Type</th>
+            <td>{{ item.item_type }}</td>
+          </tr>
+          {% if item.bought_date %}
+          <tr>
+            <th scope="row">Bought date</th>
+            <td>{{ item.bought_date|date:"Y-m-d" }}</td>
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <a class="btn btn-danger" href="{% url 'app_to_buy_list:item-list' %}">Back to list</a>
+      {% if item.link %}
+      <a class="btn btn-info" href="{{ item.link }}" target="_blank">{{ item.name }}</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<br>
+
+{% endblock content %}
